@@ -6,34 +6,43 @@ class Spellbook:
                 self.name = name
                 self.spells = spells
 
-        def findSpell(self, spellname):
-                ####################################
-                ## spellbook = list of dictionaries
-                ## spellname = string
-                ##########
-                ## NEXT CHANGE:
-                ## Call to API and get information about the spell
-                ## Return the API JSON response
-                ####################################
-                for spell in self.spells:
-                        if spell['name'].lower() == spellname.lower():
-                                return spell
-                                break
-                        else:
-                                pass
+        def getSpellData(self, spellURL):
+                # input: str
+                return requests.get(spellURL).json()
+
+        def printSpell(self, spelldata):
+                components = ''
+                for p in spelldata['components']:
+                        components += ' {}'.format(p)
+                print('\n----------------------\n- Spell Name: {}\n-----------------\n'.format(spelldata['name']))
+                print('- Description: {}\n'.format(spelldata['desc'][0]))
+                print('- At a Higher Level: {}\n'.format(spelldata['higher_level'][0]))
+                print('- Page: {}\n'.format(spelldata['page']))
+                print('- Range: {}\n'.format(spelldata['range']))
+                print('- Components: {}\n'.format(components))
+                #print('- Material: {}\n'.format(spelldata['material']))
+                print('- Ritual: {}\n'.format(spelldata['ritual']))
+                print('- Duration: {}\n'.format(spelldata['duration']))
+                print('- Concentration: {}\n'.format(spelldata['concentration']))
+                print('- Casting Time: {}\n'.format(spelldata['casting_time']))
+                print('- Casting Level: {}\n'.format(spelldata['level']))
+                print('- Magic School: {}\n'.format(spelldata['school']['name']))
 
         def readSpell(self, spell):
+                # input: str
+                found = False
                 if isinstance(spell, str):
                         for x in self.spells:
                                 if x['name'].lower() == spell.lower():
-                                        print("Spell Name: {}\nSpell URL: {}".format(x['name'],x['url']))
+                                        spellData = self.getSpellData(x['url'])
+                                        self.printSpell(spellData)
+                                        found = True
+                                        break
                                 else:
                                         pass
-                elif isinstance(spell, dict):
-                        for x in self.spells:
-                                if x == spell:
-                                        print("Spell Name: {}\nSpell URL: {}".format(x['name'],x['url']))
-                                else:
-                                        pass
+                        if not found:
+                                print('\nThe spell {} was not found.'.format(spell))   
                 else:
-                        print('ERROR: the parameter passed to "readSpell" is not a "string" or "list".')
+                        error=('ERROR: the parameter - "{}" -  passed to "readSpell" is not a "string" or "list".'.format(spell))
+                        raise Exception(error)
+                
