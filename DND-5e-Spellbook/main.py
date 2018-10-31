@@ -15,20 +15,25 @@ import json
 from spellbook import Spellbook
 
 run = True
-response = requests.get('http://dnd5eapi.co/api/spells').json()['results']
-sb = Spellbook(input('What would you like to name your spellbook?\n'), response)
+sb = Spellbook(requests.get('http://dnd5eapi.co/api/spells').json()['results'])
 
 while run:
-    spell = input("\nCurrently looking at '{}', the spellbook.\nWhat spell are you trying to find?\n\nType 'exit' to leave this program.\n\n".format(sb.name))
+    spell = input("\nWhat spell are you trying to find?\n\nType 'exit' to leave this program or 'restart' to restart the progarm.\n\n")
     if spell.lower() == 'exit':
         run = False
+        print('Good luck adventurer!')
+        continue
+    elif spell.lower() == 'restart':
+        print('RESTARTING...\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
         continue
     else:
-        sb.readSpell(spell)
+        try:
+            print('\n--------------------------\n')
+            sb.readSpell(spell)
+        except:
+            print('----------------------------------------\n- Invalid input, try again. -\n----------------------------------------')
+            pass
         print('\n\n')
-
-
-
 
 
 
