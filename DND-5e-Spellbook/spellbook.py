@@ -43,6 +43,6 @@ class Spellbook:
                         if not found:
                                 print('\nThe spell {} was not found.'.format(spell))   
                 else:
-                        error=('ERROR: the parameter - "{}" -  passed to "readSpell" is not a "string" or "list".'.format(spell))
+                        error=('ERROR: the parameter - "{}" -  passed to "readSpell" is not a "string".'.format(spell))
                         raise Exception(error)
                 
