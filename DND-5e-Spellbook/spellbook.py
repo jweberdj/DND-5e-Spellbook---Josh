@@ -56,15 +56,20 @@ class Spellbook:
                         for r in qresults:
                                 print("{}. {}\n".format(count+1, r))
                                 count += 1
+                        uinput = input("Type the option that best matches your search or type '999' to restart your search.\n\n")
                         while inputerror:
                                 try:
-                                        uinput = int(input("Type the option that best matches your search or type '999' to restart your search.\n\n"))
-                                        inputerror = False
+                                        uinput = int(uinput)
+                                        if uinput in range(len(qresults)+1):
+                                                self.readSpell(qresults[uinput-1])
+                                                inputerror = False
+                                        elif uinput == 999:
+                                                inputerror = False
+                                                pass
+                                        else:
+                                                uinput = input("Sorry, that's not an option!\nType the option that best matches your search or type '999' to restart your search.\n\n")
+                                        
                                 except:
-                                        print('Input value is wrong, try again.\n')
-                                        inputerror = True
-                        if uinput in range(len(qresults)+1):
-                                self.readSpell(qresults[uinput-1])
-                        else:
-                                print("We could not find '{}'".format(spell))
+                                        uinput = input("Sorry, input needs to be a number!\nType the option that best matches your search or type '999' to restart your search.\n\n")
+                                        continue
                 

@@ -13,6 +13,7 @@
 import requests
 import json
 from spellbook import Spellbook
+from random import randint
 
 run = True
 sb = Spellbook(requests.get('http://dnd5eapi.co/api/spells').json()['results'])
@@ -26,6 +27,9 @@ while run:
     elif spell.lower() == 'restart':
         print('RESTARTING...\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
         continue
+    elif spell.lower() == 'rolld20' or spell.lower() == 'roll d20':
+        print("------------------------------\n----- You rolled a {} -----\n------------------------------".format(randint(1,20)))
+
     else:
         try:
             print('\n--------------------------\n')
