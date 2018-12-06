@@ -66,8 +66,7 @@ class Spellbook:
                                                 inputerror = False
                                                 pass
                                         else:
-                                                uinput = input("Sorry, that's not an option!\nType the option that best matches your search or type '999' to restart your search.\n\n")
-                                        
+                                                uinput = input("Sorry, that's not an option!\nType the option that best matches your search or type '999' to restart your search.\n\n")                                        
                                 except:
                                         uinput = input("Sorry, input needs to be a number!\nType the option that best matches your search or type '999' to restart your search.\n\n")
                                         continue
