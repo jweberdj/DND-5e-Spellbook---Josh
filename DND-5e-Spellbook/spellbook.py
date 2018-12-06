@@ -37,7 +37,7 @@ class Spellbook:
                 for x in process.extract(spell, self.spells)[0:3]:
                         rs.append(x[0]['name'])
                 return rs
-
+                
         def readSpell(self, spell):
                 # input: str
                 found = False
