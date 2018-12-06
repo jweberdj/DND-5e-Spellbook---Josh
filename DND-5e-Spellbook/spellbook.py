@@ -69,4 +69,11 @@ class Spellbook:
                                                 uinput = input("Sorry, that's not an option!\nType the option that best matches your search or type '999' to restart your search.\n\n")                                        
                                 except:
                                         uinput = input("Sorry, input needs to be a number!\nType the option that best matches your search or type '999' to restart your search.\n\n")
+<<<<<<< HEAD
                                         continue
+=======
+                                        continue
+                
+
+
+>>>>>>> 228d975f1763bd3bf4189fd4d4533e5f5e95055f
