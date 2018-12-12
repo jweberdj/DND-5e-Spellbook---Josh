@@ -3,9 +3,9 @@ import json
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
 
-class Spellbook:
-        def __init__(self,spells=[]):
-                self.spells = spells
+class Spellbook(object):
+        def __init__(self):
+                self.spells = requests.get('http://dnd5eapi.co/api/spells').json()['results']
 
         def printSpell(self, spelldata):
                 components = ''
@@ -32,10 +32,7 @@ class Spellbook:
                 print('- Magic School: {}\n------------------------------------'.format(spelldata['school']['name']))
 
         def spellSearch(self, spell):
-                # take the query and return the top 3 closest results from the spell list of the spellbook
-                rs = []
-                for x in process.extract(spell, self.spells)[0:3]:
-                        rs.append(x[0]['name'])
+                rs = [x[0]['name'] for x in process.extract(spell, self.spells)[0:3]]
                 return rs
                 
         def readSpell(self, spell):
@@ -52,28 +49,21 @@ class Spellbook:
                         print("We could not find a match. These options may be close:\n")
                         count = 0
                         inputerror = True
-                        qresults= self.spellSearch(spell)
-                        for r in qresults:
-                                print("{}. {}\n".format(count+1, r))
-                                count += 1
-                        uinput = int(input("Type the option that best matches your search or type '999' to restart your search.\n\n"))
+                        qresults = self.spellSearch(spell)
+                        for num,r in enumerate(qresults, start=1):
+                                print("{}. {}\n".format(num, r))
+                        
+                        uinput = int(input("Type the option that best matches your search or type '-r' to restart your search.\n\n"))
                         while inputerror:
                                 try:
                                         if uinput in range(len(qresults)+1):
                                                 self.readSpell(qresults[uinput-1])
                                                 inputerror = False
-                                        elif uinput == 999:
+                                        elif uinput == '-r':
                                                 inputerror = False
                                                 pass
                                         else:
                                                 uinput = input("Sorry, that's not an option!\nType the option that best matches your search or type '999' to restart your search.\n\n")                                        
                                 except:
                                         uinput = input("Sorry, input needs to be a number!\nType the option that best matches your search or type '999' to restart your search.\n\n")
-<<<<<<< HEAD
                                         continue
-=======
-                                        continue
-                
-
-
->>>>>>> 228d975f1763bd3bf4189fd4d4533e5f5e95055f

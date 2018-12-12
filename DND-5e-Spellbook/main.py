@@ -1,22 +1,10 @@
-###########################
-##  D&D Spellbook, 5e
-##  Joshua Weber
-##  
-##  -- TO DOs --
-##  * 
-##  
-##
-##
-##
-###########################
-
 import requests
 import json
 from spellbook import Spellbook
 from random import randint
 
 run = True
-sb = Spellbook(requests.get('http://dnd5eapi.co/api/spells').json()['results'])
+sb = Spellbook()
 
 while run:
     spell = input("\nWhat spell are you trying to find?\n\nType 'exit' to leave this program or 'restart' to restart the progarm.\n\n")
