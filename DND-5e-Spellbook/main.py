@@ -19,12 +19,8 @@ while run:
         print("------------------------------\n----- You rolled a {} -----\n------------------------------".format(randint(1,20)))
 
     else:
-        try:
-            print('\n--------------------------\n')
-            sb.readSpell(spell)
-        except:
-            print('----------------------------------------\n- Invalid input, try again. -\n----------------------------------------')
-            pass
+        print('\n--------------------------\n')
+        sb.readSpell(spell)
         print('\n\n')
 
 
